@@ -1,13 +1,14 @@
+/* eslint-disable react/prop-types */
 import { DateRange } from "react-date-range";
 
-
-
-const Calander = () => {
+const Calander = ({value}) => {
+    console.log(value)
     return (
-        <div>
+      
             <DateRange
             rangeColors={['#F43F5E']}
             direction="vartical"
+            showDateDisplay={false}
             // ranges={[value]}
             // onChange={hanldeSelect}
             // date={value.startDate}
@@ -18,7 +19,7 @@ const Calander = () => {
             >
 
             </DateRange>
-        </div>
+        
     );
 };
 
