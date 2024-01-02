@@ -5,6 +5,7 @@ import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login/Login'
 import SignUp from '../pages/SignUp/SignUp'
 import RoomDetails from '../pages/RoomDetails/RoomDetails'
+import PrivetRoute from './PrivetRoute'
 
 export const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/roomDetails/:id',
-        element:<RoomDetails></RoomDetails>
+        element:<PrivetRoute><RoomDetails></RoomDetails></PrivetRoute>
       }
     ],
   },
