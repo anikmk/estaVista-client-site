@@ -6,6 +6,10 @@ import Login from '../pages/Login/Login'
 import SignUp from '../pages/SignUp/SignUp'
 import RoomDetails from '../pages/RoomDetails/RoomDetails'
 import PrivetRoute from './PrivetRoute'
+import { getRoom } from '../Api/rooms'
+import DashboardLayout from '../layouts/DashboardLayout'
+import AddRoom from '../pages/Dashboard/Host/AddRoom'
+import MyListings from '../pages/Dashboard/Host/MyListings'
 
 export const router = createBrowserRouter([
   {
@@ -19,10 +23,26 @@ export const router = createBrowserRouter([
       },
       {
         path: '/roomDetails/:id',
-        element:<PrivetRoute><RoomDetails></RoomDetails></PrivetRoute>
+        element:<PrivetRoute><RoomDetails></RoomDetails></PrivetRoute>,
+        // loader sob somoy small latter er hoy
+        loader: ({params}) => getRoom(params.id)
       }
     ],
   },
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <SignUp /> },
+
+  {
+    path:'/dashboard',
+    element:<DashboardLayout></DashboardLayout>,
+    children:[{
+      path:'addRoom',
+      element:<AddRoom></AddRoom>
+    },
+    {
+      path:'myListings',
+      element:<MyListings></MyListings>
+    }
+  ]
+  },
 ])

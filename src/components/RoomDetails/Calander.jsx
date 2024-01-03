@@ -9,13 +9,12 @@ const Calander = ({value}) => {
             rangeColors={['#F43F5E']}
             direction="vartical"
             showDateDisplay={false}
-            // ranges={[value]}
+            ranges={[value]}
             // onChange={hanldeSelect}
             // date={value.startDate}
-            // direction="vartical"
             // showDateDisplay={false}
-            // minDate={value.startDate}
-            // maxDate={value.endDate}
+            minDate={value.startDate}
+            maxDate={value.endDate}
             >
 
             </DateRange>
