@@ -17,6 +17,11 @@ export const getHostRoom = async email => {
     const {data} = await axiosSecure.get(`/hostRoom/${email}`)
     return data;
 }
+// fetch - get user role from data base
+export const getRole = async email => {
+    const {data} = await axiosSecure.get(`/user/${email}`)
+    return data.role;
+}
 
 // save room in database 
 export const addRooms = async(roomData)=>{

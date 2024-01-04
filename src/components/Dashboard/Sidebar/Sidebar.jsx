@@ -9,6 +9,8 @@ import { AiOutlineBars } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
 import { BsFillHouseAddFill } from "react-icons/bs";
 import Logo from '../../Shared/Logo'
+import useRole from '../../../hooks/useRole'
+import HostMenu from '../TableRows/HostMenu'
 
 const Sidebar = () => {
   const [toggle, setToggle] = useState(false)
@@ -22,6 +24,9 @@ const Sidebar = () => {
   const handleToggle = () => {
     setActive(!isActive)
   }
+  // get role:
+  const [role] = useRole();
+  console.log('role--->',role)
   return (
     <>
       {/* Small Screen Navbar */}
@@ -56,32 +61,20 @@ const Sidebar = () => {
           {/* Nav Items */}
           <div className='flex flex-col justify-between flex-1 mt-6'>
             {/* If a user is host */}
-            <ToggleBtn toggleHandler={toggleHandler} />
+            {role === 'host' && <ToggleBtn toggleHandler={toggleHandler} />}
             <nav>
               <MenuItem
                 icon={BsGraphUp}
                 label='Statistics'
                 address='/dashboard'
               />
-              {/* Menu Items */}
-              <MenuItem
-                icon={BsFillHouseAddFill}
-                label='Add Room'
-                address='addRoom'
+              {/*Host Menu Items */}
+              {role === 'guest' && <HostMenu></HostMenu>}
 
-              />
-              <MenuItem
-                icon={BsFillHouseAddFill}
-                label='My Listings'
-                address='myListings'
+              {role === 'host' ? toggle ? <HostMenu></HostMenu>:<HostMenu></HostMenu>:''}
 
-              />
-              <MenuItem
-                icon={BsFillHouseAddFill}
-                label='Manage Bookings'
-                address='manageBookings'
-
-              />
+              {role === 'admin' && <HostMenu></HostMenu>}
+              
             </nav>
           </div>
         </div>
