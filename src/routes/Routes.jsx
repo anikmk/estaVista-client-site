@@ -10,6 +10,10 @@ import { getRoom } from '../Api/rooms'
 import DashboardLayout from '../layouts/DashboardLayout'
 import AddRoom from '../pages/Dashboard/Host/AddRoom'
 import MyListings from '../pages/Dashboard/Host/MyListings'
+import HostPrivetRoute from './HostPrivetRoute'
+import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
+import AdminPrivetRoute from './AdminPrivetRoute'
+import Profile from '../pages/Dashboard/Common/Profile'
 
 export const router = createBrowserRouter([
   {
@@ -37,11 +41,21 @@ export const router = createBrowserRouter([
     element:<DashboardLayout></DashboardLayout>,
     children:[{
       path:'addRoom',
-      element:<AddRoom></AddRoom>
+      element:<PrivetRoute> <HostPrivetRoute>
+        <AddRoom></AddRoom>
+        </HostPrivetRoute> </PrivetRoute>
     },
     {
       path:'myListings',
-      element:<MyListings></MyListings>
+      element:<PrivetRoute><HostPrivetRoute><MyListings></MyListings></HostPrivetRoute></PrivetRoute>
+    },
+    {
+      path:'manageUsers',
+      element:<PrivetRoute><AdminPrivetRoute><ManageUsers></ManageUsers></AdminPrivetRoute></PrivetRoute>
+    },
+    {
+      path:'profile',
+      element:<Profile></Profile>
     }
   ]
   },

@@ -11,6 +11,8 @@ import { BsFillHouseAddFill } from "react-icons/bs";
 import Logo from '../../Shared/Logo'
 import useRole from '../../../hooks/useRole'
 import HostMenu from '../TableRows/HostMenu'
+import GuestMenu from '../TableRows/GuestMenu'
+import AdminMenu from '../TableRows/AdminMenu'
 
 const Sidebar = () => {
   const [toggle, setToggle] = useState(false)
@@ -69,11 +71,11 @@ const Sidebar = () => {
                 address='/dashboard'
               />
               {/*Host Menu Items */}
-              {role === 'guest' && <HostMenu></HostMenu>}
-
+              {role === 'guest' && <GuestMenu></GuestMenu>}
+              
               {role === 'host' ? toggle ? <HostMenu></HostMenu>:<HostMenu></HostMenu>:''}
 
-              {role === 'admin' && <HostMenu></HostMenu>}
+              {role === 'admin' && <AdminMenu></AdminMenu>}
               
             </nav>
           </div>

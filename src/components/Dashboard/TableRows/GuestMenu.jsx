@@ -7,7 +7,7 @@ const GuestMenu = () => {
         <>
         <MenuItem
              icon={BsFillHouseAddFill}
-             label='Add Room'
+             label='guest room'
              address='addRoom'
 
            />

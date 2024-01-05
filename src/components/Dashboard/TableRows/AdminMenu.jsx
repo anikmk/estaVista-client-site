@@ -7,8 +7,8 @@ const AdminMenu = () => {
         <>
         <MenuItem
              icon={BsFillHouseAddFill}
-             label='Add Room'
-             address='addRoom'
+             label='Manage Users'
+             address='manageUsers'
 
            />
            <MenuItem
