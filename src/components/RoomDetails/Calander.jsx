@@ -7,7 +7,7 @@ const Calander = ({value}) => {
       
             <DateRange
             rangeColors={['#F43F5E']}
-            direction="vartical"
+            // direction="vartical"
             showDateDisplay={false}
             ranges={[value]}
             // onChange={hanldeSelect}
