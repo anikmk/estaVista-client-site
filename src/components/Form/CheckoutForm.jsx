@@ -5,7 +5,9 @@ import './CheckoutForm.css'
 import useAuth from '../../hooks/useAuth'
 import { ImSpinner9 } from 'react-icons/im'
 import './CheckoutForm.css';
-import { createPaymentIntent } from '../../Api/booking'
+import { createPaymentIntent, saveBooking, updateStatus } from '../../Api/booking'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 const CheckoutForm = ({ bookingInfo, closeModal }) => {
   const stripe = useStripe()
   const elements = useElements()
@@ -13,16 +15,21 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
   const [cardError, setCardError] = useState('')
   const [clientSecret, setClientSecret] = useState('')
   const [processing, setProcessing] = useState(false)
+  const navigate = useNavigate()
 
   // Create Payment Intent
-  useEffect(()=>{
-    if(bookingInfo.price > 0){
-      createPaymentIntent({price:bookingInfo.price}).then(data=>{
-      setClientSecret(data.clientSecret)
-      console.log("client secret",data.clientSecret)
-    })
+  useEffect(() => {
+    if (bookingInfo.price > 0) {
+      createPaymentIntent({ price: bookingInfo.price })
+        .then((data) => {
+          setClientSecret(data.clientSecret);
+          console.log("Client secret set:", data.clientSecret);
+        })
+        .catch((error) => {
+          console.error("Error creating payment intent:", error);
+        });
     }
-  },[bookingInfo])
+  }, [bookingInfo]);
 
   const handleSubmit = async event => {
     event.preventDefault()
@@ -70,12 +77,28 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
     console.log('payment intent', paymentIntent)
 
     if (paymentIntent.status === 'succeeded') {
-      // save payment information to the server
-      // Update room status in db
+      
+      
       const paymentInfo = {
         ...bookingInfo,
         transactionId: paymentIntent.id,
         date: new Date(),
+      }
+      try{
+      // save booking in the database
+     await saveBooking(paymentInfo)
+     // Update room status in db
+     await updateStatus(bookingInfo.roomId,true)
+     const text = paymentIntent.id
+     toast.success(`booking succesfully-${text}`)
+     navigate('/dashboard/myListings')
+
+      }
+      catch(error){
+        toast.error(error.message)
+      }
+      finally{
+        setProcessing(false)
       }
 
       setProcessing(false)
