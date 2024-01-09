@@ -14,6 +14,8 @@ import HostPrivetRoute from './HostPrivetRoute'
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
 import AdminPrivetRoute from './AdminPrivetRoute'
 import Profile from '../pages/Dashboard/Common/Profile'
+import MyBooking from '../pages/Dashboard/Guest/MyBooking'
+import ManageBookings from '../pages/Dashboard/Host/ManageBookings'
 
 export const router = createBrowserRouter([
   {
@@ -55,7 +57,15 @@ export const router = createBrowserRouter([
     },
     {
       path:'profile',
-      element:<Profile></Profile>
+      element:<PrivetRoute><Profile></Profile></PrivetRoute>
+    },
+    {
+      path:'myBooking',
+      element:<MyBooking></MyBooking>
+    },
+    {
+      path:'manageBookings',
+      element:<HostPrivetRoute><ManageBookings></ManageBookings></HostPrivetRoute>
     }
   ]
   },

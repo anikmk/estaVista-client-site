@@ -17,12 +17,6 @@ const AdminMenu = () => {
              address='myListings'
 
            />
-           <MenuItem
-             icon={BsFillHouseAddFill}
-             label='Manage Bookings'
-             address='manageBookings'
-
-           /> 
      </>
     );
 };

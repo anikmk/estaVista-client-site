@@ -7,22 +7,11 @@ const GuestMenu = () => {
         <>
         <MenuItem
              icon={BsFillHouseAddFill}
-             label='guest room'
-             address='addRoom'
+             label='My Booking'
+             address='myBooking'
 
            />
-           <MenuItem
-             icon={BsFillHouseAddFill}
-             label='My Listings'
-             address='myListings'
-
-           />
-           <MenuItem
-             icon={BsFillHouseAddFill}
-             label='Manage Bookings'
-             address='manageBookings'
-
-           /> 
+           
      </>
     );
 };

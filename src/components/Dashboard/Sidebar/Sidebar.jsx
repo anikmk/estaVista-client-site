@@ -7,7 +7,6 @@ import { GrLogout } from 'react-icons/gr'
 import { FcSettings } from 'react-icons/fc'
 import { AiOutlineBars } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
-import { BsFillHouseAddFill } from "react-icons/bs";
 import Logo from '../../Shared/Logo'
 import useRole from '../../../hooks/useRole'
 import HostMenu from '../TableRows/HostMenu'
@@ -73,7 +72,7 @@ const Sidebar = () => {
               {/*Host Menu Items */}
               {role === 'guest' && <GuestMenu></GuestMenu>}
               
-              {role === 'host' ? toggle ? <HostMenu></HostMenu>:<HostMenu></HostMenu>:''}
+              {role === 'host' ? toggle ? <HostMenu></HostMenu>:<GuestMenu></GuestMenu>:''}
 
               {role === 'admin' && <AdminMenu></AdminMenu>}
               

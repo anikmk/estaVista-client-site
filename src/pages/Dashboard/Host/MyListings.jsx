@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react'
+
 import { Helmet } from 'react-helmet-async'
 import { getHostRoom } from '../../../Api/rooms';
 import useAuth from '../../../hooks/useAuth';
 import RoomDataRow from '../../../components/Dashboard/TableRows/RoomDataRow';
+import { useQuery } from '@tanstack/react-query';
+import Loader from '../../../components/Shared/Loader';
 
 
 const MyListings = () => {
-    const {user} = useAuth();
-    const [loading,setLoading] = useState(false)
-    const [rooms,setRooms] = useState([]);
-    console.log(rooms)
-    useEffect(()=>{
-        setLoading(true)
-        getHostRoom(user?.email)
-        .then(result=>{
-            setRooms(result)
-            setLoading(false)
-        })
-    },[user])
-    if(loading) return <div>Loading....</div>
+    const {user,loading} = useAuth();
+    console.log(user.email)
+    const {data:rooms=[],isLoading} = useQuery({
+      queryKey:user?.email,
+      enabled:!loading,
+      queryFn:async () => await getHostRoom(user?.email),
+
+    })
+console.log(rooms)
+    if(isLoading) return <Loader></Loader>
+    
   return (
     <>
       <Helmet>
