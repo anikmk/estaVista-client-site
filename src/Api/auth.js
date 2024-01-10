@@ -44,3 +44,12 @@ export const updateRole = async ({email,role}) => {
     return data
 
 }
+// guest request for host to admin
+
+export const requestForHost = async (email) => {
+    const currentUser = { 
+        status:'requested'
+    } 
+    const {data} = await axiosSecure.patch(`/request/for/host/${email}`,currentUser)
+    return data
+}
